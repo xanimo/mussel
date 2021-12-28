@@ -220,7 +220,7 @@ while [ $# -gt 0 ]; do
       XPURE64=$XARCH
       XTARGET=$XARCH-linux-musl
       ;;
-    x86-64 | x86_64)
+    x86-64 | x86_64 | amd64)
       XARCH=x86-64
       LARCH=x86_64
       MARCH=$LARCH
