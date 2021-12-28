@@ -29,21 +29,21 @@ BLUEC='\033[1;34m'
 NORMALC='\033[0m'
 
 # ----- Package Versions ----- #
-binutils_ver=2.37
-gcc_ver=11.2.0
+binutils_ver=2.36.1
+gcc_ver=10.2.0
 gmp_ver=6.2.1
-isl_ver=0.24
-linux_ver=5.14.15
+isl_ver=0.23
+linux_ver=5.11.2
 mpc_ver=1.2.1
 mpfr_ver=4.1.0
 musl_ver=1.2.2
-pkgconf_ver=1.8.0
+pkgconf_ver=1.7.3
 
 # ----- Package URLs ----- #
 binutils_url=https://ftpmirror.gnu.org/binutils/binutils-$binutils_ver.tar.lz
 gcc_url=https://ftpmirror.gnu.org/gcc/gcc-$gcc_ver/gcc-$gcc_ver.tar.xz
 gmp_url=https://ftpmirror.gnu.org/gmp/gmp-$gmp_ver.tar.zst
-isl_url=https://libisl.sourceforge.io/isl-$isl_ver.tar.xz
+isl_url=http://isl.gforge.inria.fr/isl-$isl_ver.tar.xz
 linux_url=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$linux_ver.tar.xz
 mpc_url=https://ftpmirror.gnu.org/mpc/mpc-$mpc_ver.tar.gz
 mpfr_url=https://www.mpfr.org/mpfr-current/mpfr-$mpfr_ver.tar.xz
@@ -51,15 +51,15 @@ musl_url=https://www.musl-libc.org/releases/musl-$musl_ver.tar.gz
 pkgconf_url=https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgconf_ver.tar.xz
 
 # ----- Package Checksums (sha512sum) ----- #
-binutils_sum=eca2422fcb1a33bf05f66194faebd235b74872aa39a1865fc0b1a98d00c1061449380d51753e8312134aed885f06631f2917e164e239a5c52861d60ca730d64d
-gcc_sum=d53a0a966230895c54f01aea38696f818817b505f1e2bfa65e508753fcd01b2aedb4a61434f41f3a2ddbbd9f41384b96153c684ded3f0fa97c82758d9de5c7cf
+binutils_sum=4c28e2dbc5b5cc99ab1265c8569a63925cf99109296deaa602b9d7d1123dcc1011ffbffb7bb6bb0e5e812176b43153f5a576cc4281e5f2b06e4a1d9db146b609
+gcc_sum=42ae38928bd2e8183af445da34220964eb690b675b1892bbeb7cd5bb62be499011ec9a93397dba5e2fb681afadfc6f2767d03b9035b44ba9be807187ae6dc65e
 gmp_sum=1dfd3a5cd9afa2db2f2e491b0df045e3c15863e61f4efc7b93c5b32bdfefe572b25bb7621df4075bf8427274d438df194629f5169250a058dadaeaaec599291b
-isl_sum=ff6bdcff839e1cd473f2a0c1e4dd4a3612ec6fee4544ccbc62b530a7248db2cf93b4b99bf493a86ddf2aba00e768927265d5d411f92061ea85fd7929073428e8
-linux_sum=f2549b5494ce2e8174b70d29282a60e072ca31d4a83e1e1f4b3f0acb150e1849fe4f2eaf6b6cb18ac758e723c3d53aa8686e4e6d9d7cb9696983ffe64f6a9b59
+isl_sum=da4e7cbd5045d074581d4e1c212acb074a8b2345a96515151b0543cbe2601db6ac2bbd93f9ad6643e98f845b68f438f3882c05b8b90969ae542802a3c78fea20
+linux_sum=16090ec6dea7a8c417ca7483b296902c9b55b423482ad8a881dffcaae76411806bc9502373efd6a51b0acefec3a44c19c5a7d42c5b76c1321183a4798a5959d3
 mpc_sum=3279f813ab37f47fdcc800e4ac5f306417d07f539593ca715876e43e04896e1d5bceccfb288ef2908a3f24b760747d0dbd0392a24b9b341bc3e12082e5c836ee
 mpfr_sum=1bd1c349741a6529dfa53af4f0da8d49254b164ece8a46928cdb13a99460285622d57fe6f68cef19c6727b3f9daa25ddb3d7d65c201c8f387e421c7f7bee6273
 musl_sum=5344b581bd6463d71af8c13e91792fa51f25a96a1ecbea81e42664b63d90b325aeb421dfbc8c22e187397ca08e84d9296a0c0c299ba04fa2b751d6864914bd82
-pkgconf_sum=58204006408ad5ce91222ed3c93c2e0b61c04fa83c0a8ad337b747b583744578dbebd4ad5ccbc577689637caa1c5dc246b7795ac46e39c6666b1aa78199b7c28
+pkgconf_sum=37b6c4f9f3b93970e35b6970fde22fbbde65e7fa32a5634b3fdfc25cc1f33843582722ad13d9a8e96fd6768406fcbe86bf5feb76996ddd0bb66d6ff91e65f0b6
 
 # ----- Development Directories ----- #
 CURDIR="$PWD"
