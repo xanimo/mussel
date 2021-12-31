@@ -1,3 +1,3 @@
 build-toolchain:
-	docker buildx build --platform=linux/amd64 \
-	-t xanimo/musl-toolchain . --load
+	docker buildx build --platform=linux/386,linux/amd64,linux/arm64,linux/arm \
+	-t xanimo/musl-toolchain . --push

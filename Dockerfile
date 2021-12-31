@@ -23,7 +23,7 @@ RUN set -ex && ARCHITECTURE=$(dpkg --print-architecture) \
     && if [ "${ARCHITECTURE}" = "amd64" ]; then RLS_ARCH=x86_64 ; fi \
     && if [ "${ARCHITECTURE}" = "arm64" ]; then RLS_ARCH=aarch64; fi \
     && if [ "${ARCHITECTURE}" = "armhf" ]; then RLS_ARCH=arm && RLS_LIB=gnueabihf; fi \
-    && if [ "${ARCHITECTURE}" = "i386" ]; then RLS_ARCH=i686-pc; fi \
+    && if [ "${ARCHITECTURE}" = "i386" ]; then RLS_ARCH=i386; fi \
     && if [ "${RLS_ARCH}" = "" ]; then echo "Could not determine architecture" >&2; exit 1; fi \
     && echo ${RLS_ARCH}-${RLS_OS}-${RLS_LIB} >> host.txt
 
@@ -70,7 +70,8 @@ COPY . mussel/
 WORKDIR /mussel
 
 RUN rm DOCUMENTATION.md Dockerfile LICENSE Makefile README.md log.txt \
-  && ./check.sh \
-  && ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -l -o -p
+  && ./check.sh
+
+# RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -l -o -p
 
 CMD ["/bin/bash"]
