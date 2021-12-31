@@ -69,9 +69,11 @@ COPY . mussel/
 
 WORKDIR /mussel
 
-RUN rm DOCUMENTATION.md Dockerfile LICENSE Makefile README.md log.txt \
+RUN rm DOCUMENTATION.md Dockerfile LICENSE Makefile README.md \
   && ./check.sh
 
-# RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -l -o -p
+RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -p
+
+RUN rm -rf sources/ builds/
 
 CMD ["/bin/bash"]
