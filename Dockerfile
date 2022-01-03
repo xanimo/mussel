@@ -14,12 +14,9 @@ ENV PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MSYSROOT/usr/include
 ENV PKG_CONFIG_SYSTEM_LIBRARY_PATH=$MSYSROOT/usr/lib
 ENV PATH=/mussel/toolchain/bin:/usr/bin:/bin
 
-# configure the shell before the first RUN
-SHELL ["/bin/bash", "-ex", "-o", "pipefail", "-c"]
-
 # determine architecture, download release binary
 # and verify against random OK signer and pinned shasums
-RUN set -ex && ARCHITECTURE=$(dpkg --print-architecture) \
+RUN ARCHITECTURE=$(dpkg --print-architecture) \
     && if [ "${ARCHITECTURE}" = "amd64" ]; then RLS_ARCH=x86_64 ; fi \
     && if [ "${ARCHITECTURE}" = "arm64" ]; then RLS_ARCH=aarch64; fi \
     && if [ "${ARCHITECTURE}" = "armhf" ]; then RLS_ARCH=arm && RLS_LIB=gnueabihf; fi \
@@ -37,10 +34,10 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   bison \
   build-essential \
   bzip2 \
-  ccache \
   coreutils \
   diffutils \
   file \
+  flex \
   findutils \
   gawk \
   git \
@@ -61,19 +58,18 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   texinfo \
   wget \
   xz-utils \
-  zstd \
-  && ln -s /lib/$(cat host.txt)/libc.so.6 /lib/libc.so.6 \
-  && rm -rf /var/lib/apt/lists/*
+  zstd
+
+RUN ln -s /lib/$(cat host.txt)/libc.so.6 /lib/libc.so.6
 
 COPY . mussel/
 
 WORKDIR /mussel
 
 RUN rm DOCUMENTATION.md Dockerfile LICENSE Makefile README.md \
-  && ./check.sh
+  && ./check.sh \
+  && ./mussel.sh -c
 
-RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -p
-
-RUN rm -rf sources/ builds/
+RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -l -o -p
 
 CMD ["/bin/bash"]
