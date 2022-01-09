@@ -1,9 +1,11 @@
 # Build stage for mussel toolchain
-FROM debian:bookworm-slim as musl-toolchain
+FROM debian:sid-slim as musl-toolchain
 
 # Specify release variables
 ARG TARGETARCH
 ARG TARGETVARIANT
+ARG BUILDARCH
+ARG BUILDVARIANT
 ARG RLS_OS=linux
 ARG RLS_LIB=gnu
 ARG RLS_ARCH=x86_64
@@ -51,6 +53,7 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   lzip \
   m4 \
   make \
+  "musl:${TARGETARCH}" \
   perl \
   pv \
   rsync \
@@ -70,6 +73,6 @@ RUN rm DOCUMENTATION.md Dockerfile LICENSE Makefile README.md \
   && ./check.sh \
   && ./mussel.sh -c
 
-RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -l -o -p
+RUN ./mussel.sh ${TARGETARCH}${TARGETVARIANT} -k -p
 
 CMD ["/bin/bash"]
