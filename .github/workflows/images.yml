@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: amd64
+    branches: arm64
 
 jobs:
   build:
@@ -20,5 +20,5 @@ jobs:
       - name: build the image
         run: |
           docker buildx build \
-          -t xanimo/musl-x-compiler:latest \
-          --platform linux/amd64 . 
+          -t xanimo/musl-toolchain:arm64 \
+          --platform linux/arm64 . 
