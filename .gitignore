@@ -6,3 +6,4 @@ builds/
 sources/
 sysroot/
 toolchain/
+arch/

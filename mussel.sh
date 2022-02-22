@@ -29,20 +29,20 @@ BLUEC='\033[1;34m'
 NORMALC='\033[0m'
 
 # ----- Package Versions ----- #
-binutils_ver=2.37
+binutils_ver=2.38
 gcc_ver=11.2.0
 gmp_ver=6.2.1
 isl_ver=0.24
-linux_ver=5.11.2
+linux_ver=5.16.10
 mpc_ver=1.2.1
 mpfr_ver=4.1.0
 musl_ver=1.2.2
 pkgconf_ver=1.8.0
 
 # ----- Package URLs ----- #
-binutils_url=https://ftpmirror.gnu.org/binutils/binutils-$binutils_ver.tar.lz
+binutils_url=https://ftp.gnu.org/gnu/binutils/binutils-$binutils_ver.tar.lz
 gcc_url=https://ftpmirror.gnu.org/gcc/gcc-$gcc_ver/gcc-$gcc_ver.tar.xz
-gmp_url=https://ftpmirror.gnu.org/gmp/gmp-$gmp_ver.tar.zst
+gmp_url=https://ftp.gnu.org/gnu/gmp/gmp-$gmp_ver.tar.zst
 isl_url=https://libisl.sourceforge.io/isl-$isl_ver.tar.xz
 linux_url=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$linux_ver.tar.xz
 mpc_url=https://ftpmirror.gnu.org/mpc/mpc-$mpc_ver.tar.gz
@@ -51,11 +51,11 @@ musl_url=https://www.musl-libc.org/releases/musl-$musl_ver.tar.gz
 pkgconf_url=https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgconf_ver.tar.xz
 
 # ----- Package Checksums (sha512sum) ----- #
-binutils_sum=eca2422fcb1a33bf05f66194faebd235b74872aa39a1865fc0b1a98d00c1061449380d51753e8312134aed885f06631f2917e164e239a5c52861d60ca730d64d
+binutils_sum=99f879815e58994d2ca0fd9635ca613348828b4810787789ada70e79da2687f5418d92e26b7ebfa2c6f0304b6450181164c416b1cfd909ad039138edbf6060bf
 gcc_sum=d53a0a966230895c54f01aea38696f818817b505f1e2bfa65e508753fcd01b2aedb4a61434f41f3a2ddbbd9f41384b96153c684ded3f0fa97c82758d9de5c7cf
 gmp_sum=1dfd3a5cd9afa2db2f2e491b0df045e3c15863e61f4efc7b93c5b32bdfefe572b25bb7621df4075bf8427274d438df194629f5169250a058dadaeaaec599291b
 isl_sum=ff6bdcff839e1cd473f2a0c1e4dd4a3612ec6fee4544ccbc62b530a7248db2cf93b4b99bf493a86ddf2aba00e768927265d5d411f92061ea85fd7929073428e8
-linux_sum=d25ad40b5bcd6a4c6042fd0fd84e196e7a58024734c3e9a484fd0d5d54a0c1d87db8a3c784eff55e43b6f021709dc685eb0efa18d2aec327e4f88a79f405705a
+linux_sum=2d1527623f96181c4797a8f73cb769e70321e673835113fbddd1374ca891d41b924220b8fdbaa46e2af7fc49a175e56524291b1816f4f6680128155c110f703e
 mpc_sum=3279f813ab37f47fdcc800e4ac5f306417d07f539593ca715876e43e04896e1d5bceccfb288ef2908a3f24b760747d0dbd0392a24b9b341bc3e12082e5c836ee
 mpfr_sum=1bd1c349741a6529dfa53af4f0da8d49254b164ece8a46928cdb13a99460285622d57fe6f68cef19c6727b3f9daa25ddb3d7d65c201c8f387e421c7f7bee6273
 musl_sum=5344b581bd6463d71af8c13e91792fa51f25a96a1ecbea81e42664b63d90b325aeb421dfbc8c22e187397ca08e84d9296a0c0c299ba04fa2b751d6864914bd82
