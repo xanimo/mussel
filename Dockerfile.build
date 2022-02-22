@@ -1,3 +1,0 @@
-FROM debian:sid-slim
-
-CMD [ "bin/bash" ]
