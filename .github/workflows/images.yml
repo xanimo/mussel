@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: arm
+    branches: arm-depends
 
 jobs:
   build:
@@ -20,5 +20,5 @@ jobs:
       - name: build the image
         run: |
           docker buildx build \
-          -t xanimo/musl-toolchain:arm \
+          -t xanimo/musl-toolchain:arm-depends \
           --platform linux/arm . --push

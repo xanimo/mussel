@@ -116,7 +116,7 @@ while [ $# -gt 0 ]; do
       XPURE64=""
       XTARGET=$1-linux-musl
       ;;
-    i386 | i686 | x86 | 386)
+    i386 | i386-pc | i686 | x86 | 386)
       XARCH=i686
       LARCH=i386
       MARCH=$LARCH

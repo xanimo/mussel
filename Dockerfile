@@ -11,6 +11,8 @@ ARG BUILDVARIANT
 ENV RLS_OS=linux
 ENV RLS_LIB=gnu
 ENV RLS_ARCH=x86_64
+# Specify release variables
+ENV DOGECOIN_VERSION=1.14.6-dev
 ENV PKG_CONFIG_PATH=$MSYSROOT/usr/lib/pkgconfig:$MSYSROOT/usr/share/pkgconfig
 ENV PKG_CONFIG_LIBDIR=$MSYSROOT/usr/lib/pkgconfig:$MSYSROOT/usr/share/pkgconfig
 ENV PKG_CONFIG_SYSROOT_DIR=$MSYSROOT
@@ -22,37 +24,48 @@ ENV PATH=/mussel/toolchain/bin:/usr/bin:/bin
 RUN ARCHITECTURE=$(dpkg --print-architecture) \
     && if [ "${ARCHITECTURE}" = "amd64" ]; then RLS_ARCH=x86_64 ; fi \
     && if [ "${ARCHITECTURE}" = "arm64" ]; then RLS_ARCH=aarch64; fi \
-    && if [ "${ARCHITECTURE}" = "armhf" ]; then RLS_ARCH=armhf && RLS_LIB=gnueabihf; fi \
-    && if [ "${ARCHITECTURE}" = "i386" ]; then RLS_ARCH=i386; fi \
+    && if [ "${ARCHITECTURE}" = "armhf" ]; then RLS_ARCH=armhf && RLS_LIB=musleabihf; fi \
+    && if [ "${ARCHITECTURE}" = "i386" ]; then RLS_ARCH=i386-pc; fi \
     && if [ "${RLS_ARCH}" = "" ]; then echo "Could not determine architecture" >&2; exit 1; fi \
-    && echo ${RLS_ARCH}-${RLS_OS}-${RLS_LIB} >> ~/host.txt
+    && echo ${RLS_ARCH}-${RLS_OS}-${RLS_LIB} >> ~/target.txt
 
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN mkdir -p /mussel \
+RUN dpkg --add-architecture ${TARGETARCH} \
+  && mkdir -p /mussel \
   && apt-get update -y \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  automake \
+  autotools-dev \
   bash \
   bc \
   binutils \
   bison \
+  bsdmainutils \
   build-essential \
   bzip2 \
   coreutils \
   ccache \
+  curl \
   diffutils \
   file \
   flex \
   findutils \
+  gettext \
   gawk \
   git \
   grep \
   gzip \
+  lcov \
   libarchive-dev \
   libarchive-tools \
   libc6 \
+  libbsd-dev \
   libbison-dev \
+  libtool \
+  libtool-bin \
+  libunwind-dev \
   libzstd-dev \
   lzip \
   m4 \
@@ -60,6 +73,10 @@ RUN mkdir -p /mussel \
   "musl:$(dpkg --print-architecture)" \
   perl \
   pv \
+  python3 \
+  python3-zmq \
+  python3-distutils \
+  python3-dev \
   rsync \
   sed \
   texinfo \
@@ -67,7 +84,7 @@ RUN mkdir -p /mussel \
   xz-utils \
   zstd
 
-RUN ln -s /lib/$(cat ~/host.txt)/libc.so.6 /lib/libc.so.6
+RUN ln -s /lib/$(cat ~/target.txt)/libc.so.6 /lib/libc.so.6
 
 COPY /patches/ /mussel/patches/
 COPY check.sh \
@@ -79,6 +96,18 @@ RUN ./check.sh
 
 RUN ./mussel.sh ${TARGETARCH} -k -l -o -p
 
-RUN rm -rf ./build ./sources
+RUN rm -rf /builds /sources
+
+RUN ln -f -s /lib/$(cat ~/target.txt)/libc.so ./sysroot/lib/ld-$(cut -d- -f3 ~/target.txt)-$(cut -d- -f1 ~/target.txt).so.1
+
+RUN git clone https://github.com/dogecoin/dogecoin.git dogecoin-${DOGECOIN_VERSION}/
+WORKDIR /mussel/dogecoin-${DOGECOIN_VERSION}
+
+RUN git checkout ${DOGECOIN_VERSION}
+RUN make \
+  HOST=$(cat ~/target.txt) \
+  NO_QT=1 \
+  -C depends \
+  -j$(nproc)
 
 CMD ["/bin/bash"]
