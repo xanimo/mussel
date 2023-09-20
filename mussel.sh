@@ -46,7 +46,7 @@ gmp_url=https://ftp.gnu.org/gnu/gmp/gmp-$gmp_ver.tar.zst
 isl_url=https://libisl.sourceforge.io/isl-$isl_ver.tar.xz
 linux_url=https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$linux_ver.tar.xz
 mpc_url=https://ftpmirror.gnu.org/mpc/mpc-$mpc_ver.tar.gz
-mpfr_url=https://www.mpfr.org/mpfr-current/mpfr-$mpfr_ver.tar.xz
+mpfr_url=https://ftp.gnu.org/gnu/mpfr/mpfr-$mpfr_ver.tar.xz
 musl_url=https://www.musl-libc.org/releases/musl-$musl_ver.tar.gz
 pkgconf_url=https://distfiles.dereferenced.org/pkgconf/pkgconf-$pkgconf_ver.tar.xz
 
@@ -428,6 +428,7 @@ mpackage isl "$isl_url" $isl_sum $isl_ver
 [ $LINUX_HEADERS_SUPPORT = yes ] && mpackage linux "$linux_url" $linux_sum $linux_ver
 
 mpackage mpc "$mpc_url" $mpc_sum $mpc_ver
+echo mpfr "$mpfr_url" $mpfr_sum $mpfr_ver
 mpackage mpfr "$mpfr_url" $mpfr_sum $mpfr_ver
 mpackage musl "$musl_url" $musl_sum $musl_ver
 
