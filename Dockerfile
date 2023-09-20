@@ -81,4 +81,30 @@ RUN ./mussel.sh ${TARGETARCH} -k -l -o -p
 
 RUN rm -rf ./build ./sources
 
+FROM debian:bullseye-slim AS final
+
+# Specify release variables
+ARG TARGETARCH
+ENV TARGETARCH=${TARGETARCH}
+ARG TARGETVARIANT
+ENV TARGETVARIANT=${TARGETVARIANT}
+ARG BUILDARCH
+ARG BUILDVARIANT
+ENV RLS_OS=linux
+ENV RLS_LIB=gnu
+ENV RLS_ARCH=x86_64
+ENV PKG_CONFIG_PATH=$MSYSROOT/usr/lib/pkgconfig:$MSYSROOT/usr/share/pkgconfig
+ENV PKG_CONFIG_LIBDIR=$MSYSROOT/usr/lib/pkgconfig:$MSYSROOT/usr/share/pkgconfig
+ENV PKG_CONFIG_SYSROOT_DIR=$MSYSROOT
+ENV PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MSYSROOT/usr/include
+ENV PKG_CONFIG_SYSTEM_LIBRARY_PATH=$MSYSROOT/usr/lib
+ENV PATH=/mussel/toolchain/bin:/usr/bin:/bin
+
+RUN mkdir -p /mussel/
+
+WORKDIR /mussel
+
+COPY --from=musl-toolchain /mussel/toolchain/ /mussel/
+COPY --from=musl-toolchain /mussel/sysroot/ /mussel/
+
 CMD ["/bin/bash"]
